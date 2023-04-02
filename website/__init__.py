@@ -6,6 +6,7 @@ import psycopg2
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
+
 def create_app():
     app = Flask(__name__)
     # future Greg - how to store this privately
@@ -32,6 +33,7 @@ def create_app():
         return User.query.get(int(id))
 
     return app
+
 
 def create_database(app):
     with app.app_context():
