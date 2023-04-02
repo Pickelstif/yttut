@@ -3,3 +3,4 @@ Werkzeug~=2.2.3
 SQLAlchemy~=2.0.8
 flask_sqlalchemy
 flask_login
+mysqlclient==2.1.1
