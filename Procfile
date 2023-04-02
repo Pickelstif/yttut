@@ -1,1 +1,2 @@
-ÿþ
+web: gunicorn
+main:app
