@@ -4,3 +4,4 @@ SQLAlchemy~=2.0.8
 flask_sqlalchemy
 flask_login
 psycopg2
+gunicorn
