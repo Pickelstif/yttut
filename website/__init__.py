@@ -2,6 +2,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
+from google.cloud import storage
+
+
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -13,14 +16,27 @@ DBNAME ="database"
 PROJECT_ID ="yttut"
 INSTANCE_NAME ="big-keyword-382510:asia-east2:yttut"
 
+GCLOUD_DB = "gs://big-keyword-382510.appspot.com/database.db"
+
 
 def create_app():
     basedir = os.path.join(os.path.pardir, "tmp")
+
+    # Initialise a client
+    storage_client = storage.Client("yttut")
+    # Create a bucket object for our bucket
+    bucket = storage_client.bucket("big-keyword-382510.appspot.com")
+    # Create a blob object from the filepath
+    blob = bucket.blob("database.db")
+    # Download the file to a destination
+    blob.download_to_filename("./tmp/database.db")
+
     #os.path.dirname(os.path.abspath(__file__))
 
     app = Flask(__name__)
     # future Greg - how to store this privately
     app.config['SECRET_KEY'] = 'mysecretkey'
+    #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + GCLOUD_DB
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, DB_NAME)
     #app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+mysqldb://root:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}?unix_socket=/cloudsql/{PROJECT_ID}:{INSTANCE_NAME}"
     #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
