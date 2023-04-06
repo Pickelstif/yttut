@@ -1,3 +1,4 @@
+import sqlalchemy
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -15,18 +16,24 @@ def create_app():
 
     app = Flask(__name__)
 
+
+
+
     # configuration
     app.config["SECRET_KEY"] = "yoursecretkey"
+    # removed   and {PROJECT_ID}: after password
     app.config[
-        "SQLALCHEMY_DATABASE_URI"] = f"mysql+mysqldb://root:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}?unix_socket=/cloudsql/{PROJECT_ID}:{INSTANCE_NAME}"
+        "SQLALCHEMY_DATABASE_URI"] = f"mysql+mysqldb://gflask:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}?unix_socket=/cloudsql/{INSTANCE_NAME}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
     db.init_app(app)
 
     from .models import User, Note
 
-    with app.app_context():
-        db.create_all()
+
+
+    #with app.app_context():
+    #    db.create_all()
 
     # basedir = os.path.join(os.path.pardir, "tmp")
 

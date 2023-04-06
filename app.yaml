@@ -13,6 +13,9 @@
 
 runtime: python39
 
+env_variables:
+  GUNICORN_CMD_ARGS: "--preload"
+
 handlers:
   # This configures Google App Engine to serve the files in the app's static
   # directory.
