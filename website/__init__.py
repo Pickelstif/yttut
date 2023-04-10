@@ -9,10 +9,10 @@ db = SQLAlchemy()
 def create_app():
     # Google Cloud SQL (change this accordingly)
     PASSWORD = "gflask"
-    PUBLIC_IP_ADDRESS = "34.122.44.173"
+    PUBLIC_IP_ADDRESS = "35.220.170.13"
     DBNAME = "yttut"
-    PROJECT_ID = "big-keyword-382510"
-    INSTANCE_NAME = "big-keyword-382510:us-central1:gflask"
+    PROJECT_ID = "gflask-382913"
+    INSTANCE_NAME = "gflask-382913:asia-east2:gflask"
 
     app = Flask(__name__)
 
@@ -32,8 +32,8 @@ def create_app():
 
 
 
-    #with app.app_context():
-    #    db.create_all()
+    with app.app_context():
+        db.create_all()
 
     # basedir = os.path.join(os.path.pardir, "tmp")
 
